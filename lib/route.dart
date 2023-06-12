@@ -6,42 +6,34 @@ import 'details_page.dart';
 import 'home_page.dart';
 import 'inner_details_page.dart';
 
-class AppRouter {
-  const AppRouter._();
-
-  static AppRouter get I => const AppRouter._();
-
-  GoRouter generate() {
-    return GoRouter(
-      errorBuilder: (context, state) => const ErrorScreen(),
+GoRouter router = GoRouter(
+  errorBuilder: (context, state) => const ErrorScreen(),
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (context, state) {
+        return const HomePage();
+      },
       routes: <RouteBase>[
         GoRoute(
-          path: '/',
+          path: 'details',
           builder: (context, state) {
-            return const HomePage();
+            var data = state.extra;
+            return DetailsPage(data: data is String ? data : "");
           },
-          routes: <RouteBase>[
-            GoRoute(
-              path: 'details',
-              builder: (context, state) {
-                var data = state.extra;
-                return DetailsPage(data: data is String ? data : "");
-              },
-            ),
-            GoRoute(
-              name: "sub_details",
-              path: 'sub_details/:page/:sq',
-              builder: (context, state) {
-                var data = state.extra;
-                return SubDetailsPage(data: data is String ? data : "");
-              },
-            ),
-          ],
+        ),
+        GoRoute(
+          name: "sub_details",
+          path: 'sub_details/:page/:sq',
+          builder: (context, state) {
+            var data = state.extra;
+            return SubDetailsPage(data: data is String ? data : "");
+          },
         ),
       ],
-    );
-  }
-}
+    ),
+  ],
+);
 
 class ErrorScreen extends StatelessWidget {
   const ErrorScreen({Key? key}) : super(key: key);

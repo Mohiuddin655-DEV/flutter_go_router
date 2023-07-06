@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_andomie/widgets.dart';
 import 'package:go_router/go_router.dart';
@@ -6,12 +8,15 @@ import 'details_page.dart';
 import 'home_page.dart';
 import 'inner_details_page.dart';
 
+var a = 0;
+
 GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
   routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (context, state) {
+        log("Home : ${++a}");
         return const HomePage();
       },
       routes: <RouteBase>[

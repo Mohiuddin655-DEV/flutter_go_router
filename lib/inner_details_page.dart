@@ -33,7 +33,7 @@ class SubDetailsPage extends StatelessWidget {
             text: "Back",
             borderRadius: 12,
             widthMin: 100,
-            onClick: (context) => context.go('data'),
+            onClick: (context) => context.pop('data'),
           ),
           TextView(
             text: data,

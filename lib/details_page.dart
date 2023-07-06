@@ -33,7 +33,7 @@ class DetailsPage extends StatelessWidget {
             text: "Go Sub Details",
             borderRadius: 12,
             widthMin: 100,
-            onClick: (c) => context.goNamed(
+            onClick: (context) => context.pushNamed(
               'sub_details',
               extra: "I'm sub contents!",
               pathParameters: {

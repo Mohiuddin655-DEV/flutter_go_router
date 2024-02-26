@@ -1,14 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_andomie/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 import 'details_page.dart';
 import 'home_page.dart';
 import 'inner_details_page.dart';
-
-var a = 0;
 
 GoRouter router = GoRouter(
   errorBuilder: (context, state) => const ErrorScreen(),
@@ -16,7 +11,6 @@ GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) {
-        log("Home : ${++a}");
         return const HomePage();
       },
       routes: <RouteBase>[
@@ -24,7 +18,11 @@ GoRouter router = GoRouter(
           path: 'details',
           builder: (context, state) {
             var data = state.extra;
-            return DetailsPage(data: data is String ? data : "");
+            var path = state.uri.toString();
+            return DetailsPage(
+              path: path,
+              data: data is String ? data : "",
+            );
           },
         ),
         GoRoute(
@@ -32,7 +30,11 @@ GoRouter router = GoRouter(
           path: 'sub_details/:page/:sq',
           builder: (context, state) {
             var data = state.extra;
-            return SubDetailsPage(data: data is String ? data : "");
+            var path = state.uri.toString();
+            return SubDetailsPage(
+              path: path,
+              data: data is String ? data : "",
+            );
           },
         ),
       ],
@@ -48,10 +50,12 @@ class ErrorScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const RawTextView(
-          text: "Error",
-          textSize: 20,
-          textColor: Colors.white,
+        title: const Text(
+          "Error",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         iconTheme: const IconThemeData(
           color: Colors.white,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_andomie/widgets.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
@@ -10,21 +9,37 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const RawTextView(
-          text: "Home",
-          textSize: 20,
-          textColor: Colors.white,
+        title: const Text(
+          "Home",
+          style: TextStyle(
+            fontSize: 20,
+            color: Colors.white,
+          ),
         ),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: Center(
-        child: Button(
-          text: "Go Details",
-          borderRadius: 12,
-          widthMin: 100,
-          onClick: (context) => context.go(
+        child: GestureDetector(
+          onTap: () => context.go(
             '/details',
             extra: "Hi, I'm Omie...!",
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 24,
+              vertical: 12,
+            ),
+            child: const Text(
+              "Go Details",
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
       ),
